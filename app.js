@@ -1,8 +1,31 @@
-//input
-var username = prompt("Give me username")
+var btnTranslate=document.querySelector("#btn-transtale");
+var txtInput=document.querySelector("#txt-input");
+var outputDiv=document.querySelector("#output");
 
-//processing
-var welcomeMessage = "this script works!" + username;
+// var serverURL="https://lessonfourapi.tanaypratap.repl.co/translate/yoda.json"
 
-//output
-alert(welcomeMessage);
+var serverURL="https://api.funtranslations.com/translate/minion.json"
+ 
+function getTranslationURL(text){
+     return serverURL + "?" + "text=" + text
+ }
+
+ function errorHandler(error){
+     console.log("error occured", error);
+     alert("something wrong with the server! try again after sometime")
+ }
+
+ function clickHandler(){
+     var inputText=txtInput.nodeValue; //taking input
+
+     //calling server for processing
+     fetch(getTranslationURL(inputText))
+         .then(response => response.json())
+         .then(json => {
+             var translatedText = json.contents.translated;
+             outputDiv.innerText=translatedText; //output
+         })
+         .catch(errorHandler)
+};
+
+btnTranslate.addEventListener("click",clickHandler)
