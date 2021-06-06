@@ -22,9 +22,7 @@ function getTranslationURL(input){
      alert("something wrong with the server! try again after sometime")
  }
 
- console.log(txtInput)
 
- 
  function clickmyHandler(){
      var inputText=txtInput.value; //taking input
 
